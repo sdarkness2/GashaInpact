@@ -3,7 +3,7 @@ from random import randint
 
 class Gacha():
     __personagem = Personagem()
-    __personagemSelecionado: str
+    __personagemSelecionado: list
 
     def GachaPersonagem(self):
         taxa = randint(1, 10000)
@@ -12,7 +12,7 @@ class Gacha():
         elif taxa > 64 and taxa <= 1264:
             self.__personagemSelecionado = self.__personagem.GetPersonagensQuatroEstrelas()
         else:
-            self.__personagemSelecionado = 'flop-weapon-3'
+            self.__personagemSelecionado = (999, 'flop', 'flop', 3)
         return self.__personagemSelecionado
 
     def GachaCincoDefinitivo(self):

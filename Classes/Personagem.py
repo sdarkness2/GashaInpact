@@ -1,11 +1,22 @@
 from random import choice
+import mysql.connector
 
 class Personagem():
-    __personagensCincoEstrelas: list[str] = ['Diluc-Pyro-5', 'Mona-Hydro-5', 'Xiao-Anemo-5']
-    __personagensQuatroEstrelas: list[str] = ['Albedo-Pyro-4', 'Barbara-Hydro-4', 'Sucrose-Anemo-4']
+    ## V1
+    ##__personagensCincoEstrelas: list = ['Diluc-Pyro-5', 'Mona-Hydro-5', 'Xiao-Anemo-5']
+    ##__personagensQuatroEstrelas: list = ['Albedo-Pyro-4', 'Barbara-Hydro-4', 'Sucrose-Anemo-4']
+    __mydb = mysql.connector.connect(user='root', password='12345678', host='127.0.0.1', database='gashaimpactdb')
 
     def GetPersonagensCincoEstrelas(self):
-        return choice(self.__personagensCincoEstrelas)
+        query = "SELECT * FROM PERSONAGEM WHERE ESTRELA = 5 ORDER BY RAND() LIMIT 1"
+        mycursor = self.__mydb.cursor()
+        mycursor.execute(query)
+        removerdalista = mycursor.fetchall()
+        return removerdalista[0]
 
     def GetPersonagensQuatroEstrelas(self):
-        return choice(self.__personagensQuatroEstrelas)
+        query = "SELECT * FROM PERSONAGEM WHERE ESTRELA = 4 ORDER BY RAND() LIMIT 1"
+        mycursor = self.__mydb.cursor()
+        mycursor.execute(query)
+        removerdalista = mycursor.fetchall()
+        return removerdalista[0]

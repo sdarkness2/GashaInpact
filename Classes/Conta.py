@@ -2,8 +2,8 @@ from Classes.Gacha import Gacha
 
 class Conta():
     __Gacha = Gacha()
-    __personagens: list[str] = []
-    __personagemDaHora: str
+    __personagens: list = []
+    __personagemDaHora: tuple
     __tiros: int = 0
     __personagemQuatroPit: int = 0
 
@@ -22,11 +22,10 @@ class Conta():
         self.GerenciarTiro(self.__personagemDaHora)
 
     #gerencia numero de tiros que você tem
-    def GerenciarTiro(self, personagem:str):
-        personagemDividido = personagem.split('-')
-        if int(personagemDividido[2]) == 5:
+    def GerenciarTiro(self, personagem):
+        if int(personagem[3]) == 5:
             self.__tiros = 0
-        elif int(personagemDividido[2]) == 4:
+        elif int(personagem[3]) == 4:
             self.__personagemQuatroPit = 0
         else:
             self.__personagemQuatroPit += 1
@@ -40,9 +39,8 @@ class Conta():
         print('Personagens na conta:')
         #quantidadeTresSeguidos = 0
         for personagem in self.__personagens:
-            personagemDividido = personagem.split('-')
-            print('Nome: {} Elemento: {} Estrelas: {}' .format(personagemDividido[0], personagemDividido[1],
-                                                               personagemDividido[2]))
+            print('Nome: {} Elemento: {} Estrelas: {}' .format(personagem[1], personagem[2],
+                                                               personagem[3]))
             #if personagemDividido[2] == '3':
             #    quantidadeTresSeguidos += 1
             #    if quantidadeTresSeguidos == 11:
